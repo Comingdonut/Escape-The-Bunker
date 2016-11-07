@@ -1,0 +1,55 @@
+Desk(1) StickNote(2) Drawer(3) TakeKeyFromDesk(4) Market(5) Item(6) Price(7) clothes(8) Paper(9)
+Bar(10)  Door(11) TakeKeyFromDrawer(12) 
+
+
+
+USE (100)
+
+
+GOTO (200)
+201[You approach the desk in curiosity.]
+205[Your stomach begins to growl which leads you to the market.]
+208[You approach the clothes, wondering if the next clue will be there...]
+210[You approach the imaging bar, not expecting much.]
+
+PICKUP (300)
+
+
+
+TAKE (300)
+304[You pick up the key wondering what it could be for...]
+312[You pick up the key, thinking you are for sure closer to getting out.]
+306[You pick up the noodles, realizing they might be a nice little snack.]
+
+LOOKAT (400)
+407[The price is $2.94, so you decide to starve.]
+
+INSPECT (400)
+407[The price is $2.94, so you decide to starve.]
+
+SCAN (500)
+506[You scan the item, wondering if you have enought to buy it.]
+
+BREAK (600)
+
+
+OPEN (700)
+703[You see a key lying inside the drawer.]
+
+EXIT (800)
+
+
+ESCAPE (900)
+
+
+PICK(1000)
+
+
+CLEAN(1100)
+
+
+READ(400)
+407[The price is $2.94, so you decide to starve.]
+
+
+

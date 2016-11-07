@@ -1,0 +1,74 @@
+ARCADEMACHINE(1) BRICK[2] Couch(3) BigTable(4) LeftTable(5) RightTable(6) TakeKeyatLeftTable(7)
+
+Look at the right table(8) BunkerDoor(9) StorageDoor(10) ClassroomDoor(11) LeftDrawer(12) RightDrawers(13) 
+
+BackDrawers(14) use the left drawer(15) use key on the right drawers(16) counter top(17) takeakeybehindtv3(18) 
+Exit bunker(19) Clock(20) 
+
+
+USE(100) 
+116[You find a screw driver...]
+
+
+GOTO(200) 
+201[You approach the arcade machine, in amazement.]
+203[You approach couch, remembering the couch got you locked in here in the first place.]
+204[Approaching the big table, you begin to wonder if there's a key inside of it.]
+205[You approach the tables on the left.]
+206[You approach the table on the right.]
+209[You approach the Bunker door, Thinking of what to do next...]
+210[Approaching the storage door, You believe there has to be something in there to help you.]
+211[You notice the Classroom door, Maybe You're free at last.]
+212[YOu approach the drawer on the left.]
+213[You approach the drawers on the right, hoping for a way or clue that will help you escape.]
+214[You approach the back drawers in curiosity...]
+217[You notice right away, a TV sitting upon the counter top.]
+220[You approach the clock, wondering if it's even work your time.]
+
+
+
+PICKUP(300)
+302[You pick up the brick, wondering if you should take it.]
+307[You take the key in disappointment knowing you are still locked in.]
+318[You take the key in excitement, thinking now you actually may be getting closer to getting out.]
+
+
+TAKE(300) 
+302[You pick up the brick, wondering if you should take it.]
+307[You take the key in disappointment knowing you are still locked in.]
+318[You take the key in excitement, thinking now you actually may be getting closer to getting out.]
+
+
+
+
+LOOKAT(400) 
+401[You see the arcade machine, so you decide to examine it.]
+408[You examine the table.]
+
+
+INSPECT(400)
+401[You see the arcade machine, so you decide to examine it.]
+408[You examine the table.]
+
+
+SCAN(500)
+
+
+BREAK(600)
+
+
+OPEN(700)
+
+
+EXIT(800)
+819[You feel somewhat complete, after getting out of the bunker.]
+
+ESCAPE(900)
+
+PICK(1000)
+
+
+CLEAN(1100)
+
+
+READ(400)
