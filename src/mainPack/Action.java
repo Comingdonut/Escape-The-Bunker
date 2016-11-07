@@ -5,14 +5,17 @@ public enum Action {
 	USE (100),
 	GOTO (200),
 	PICKUP (300),
-	TAKE (400),
-	LOOKAT (500),
-	INSPECT (600),
-	SCAN (700),
-	BREAK (800),
-	OPEN (900),
-	EXIT (1000),
-	ESCAPE (1100);
+	TAKE (300),
+	LOOKAT (400),
+	INSPECT (400),
+	SCAN (500),
+	BREAK (600),
+	OPEN (700),
+	EXIT (800),
+	ESCAPE (900),
+	PICK(1000),
+	CLEAN(1100),
+	READ(400);
 	
 	private int value;
 	

@@ -67,7 +67,13 @@ public class Validation {
 		return valid;
 	}
 	private boolean checkIfInSection(Item item, Room room){
-		return room.getRelative().contains(item);
+		boolean valid = false;
+		if(room.getRelative().contains(item)){
+			valid = true;
+		}else{
+			IO.printError("Your arms are not long enough.");
+		}
+		return valid;
 	}
 	private String getInput(){
 		String input = "";
