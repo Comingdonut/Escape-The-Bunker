@@ -3,6 +3,7 @@ package mainPack;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Validation {
 
@@ -19,26 +20,25 @@ public class Validation {
 		return action;
 	}
 
-	private Item getItem(String input){
+	private Item getItem(String input, List<Item> items){
 		Item item = null;
-		//TODO: Make Item list
-//		for(Item i : Item){
-//			if(input.contains(i.toString){
-//				item = i;
-//			}
-//		}
+		for(Item i : items){
+			if(input.toLowerCase().contains(i.getName1()) || input.toLowerCase().contains(i.getName2())){
+				item = i;
+			}
+		}
 		return item;
 	}
 
-	public Command getCommand(/*Section Lists, Action/Item hashmap*/){
+	public Command getCommand(Room room){
 		command = null;
 		Action action = null;
 		Item item = null;
 		do{
 			String input = getInput();
 			action = getAction(input);
-			item = getItem(input);
-			if(validation(action, item)){
+			item = getItem(input, room.getAvailable());
+			if(validation(action, item, room)){
 				command = new Command(action, item);
 			}
 		}while(command == null);
@@ -46,10 +46,8 @@ public class Validation {
 		return command;
 	}
 
-	private boolean validation(Action action, Item item){
-		//Add the actionable item hashmap
-		//add in section item list
-		return checkIfExists(action, item) && checkIfValidCombo(action, item) && checkIfInSection(action, item);
+	private boolean validation(Action action, Item item, Room room){
+		return checkIfExists(action, item) && checkIfValidCombo(action, item, room) && checkIfInSection(item, room);
 	}
 	private boolean checkIfExists(Action action, Item item){
 		boolean valid = true;
@@ -59,11 +57,17 @@ public class Validation {
 		}
 		return valid;
 	}
-	private boolean checkIfValidCombo(Action action, Item item /* Actionable/Item Hashmap */){
-		return false;
+	private boolean checkIfValidCombo(Action action, Item item, Room room){
+		boolean valid = false;
+		if(room.getItemsPerAction().get(action).contains(item)){
+			valid = true;
+		}else{
+			IO.printCommandError(action, item);
+		}
+		return valid;
 	}
-	private boolean checkIfInSection(Action action, Item item /* Section lists */){
-		return false;
+	private boolean checkIfInSection(Item item, Room room){
+		return room.getRelative().contains(item);
 	}
 	private String getInput(){
 		String input = "";
