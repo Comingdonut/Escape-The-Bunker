@@ -48,7 +48,7 @@ public class Validation {
 	}
 
 	private boolean validation(Action action, Item item, Room room){
-		return checkIfExists(action, item) && checkIfValidCombo(action, item, room) && checkIfInSection(item, room);
+		return checkIfExists(action, item) && checkIfValidCombo(action, item, room) /*&& checkIfInSection(item, room)*/;
 	}
 	private boolean checkIfExists(Action action, Item item){
 		boolean valid = true;
@@ -67,15 +67,15 @@ public class Validation {
 		}
 		return valid;
 	}
-	private boolean checkIfInSection(Item item, Room room){
-		boolean valid = false;
-		if(room.getRelative().contains(item)){
-			valid = true;
-		}else{
-			IO.printError("Your arms are not long enough.");
-		}
-		return valid;
-	}
+//	private boolean checkIfInSection(Item item, Room room){
+//		boolean valid = false;
+//		if(room.getRelative().contains(item)){
+//			valid = true;
+//		}else{
+//			IO.printError("Your arms are not long enough.");
+//		}
+//		return valid;
+//	}
 	private String getInput(){
 		String input = "";
 		System.out.print("> ");
