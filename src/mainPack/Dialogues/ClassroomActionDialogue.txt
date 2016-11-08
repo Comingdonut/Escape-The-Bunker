@@ -7,31 +7,31 @@ USE(100)
 
 
 GOTO(200)
-201[You approach the clock,wondering if it's even worth your time.]
-202[You approach the desk.]
-203[You walk around the tables to make sure you don't miss a single one.]
-204[You approach the locker in confidence, thinking maybe your almost free...]
-205[You approach the Bunker Door.]
-206[You approach the Classroom Door, wondering what is on the other side.]
+201 [You approach the clock,wondering if it's even worth your time.]
+202 [You approach the desk.]
+203 [You walk around the tables to make sure you don't miss a single one.]
+204 [You approach the locker in confidence, thinking maybe your almost free...]
+205 [You approach the Bunker Door.]
+206 [You approach the Classroom Door, wondering what is on the other side.]
 
 
 
 
 PICKUP(300)
-307[You pick up the cloth, wondering if you even need it.]
+307 [You pick up the cloth, wondering if you even need it.]
 
 
 TAKE(300)
-307[You pick up the cloth, wondering if you even need it.]
+307 [You pick up the cloth, wondering if you even need it.]
 
 
 LOOKAT(400)
-404[You see the key inside the locker, thinking I sure do like collecting these keys.]
+404 [You see the key inside the locker, thinking I sure do like collecting these keys.]
 
 
 
 INSPECT(400)
-404[You see the key inside the locker, thinking I sure do like collecting these keys.]
+404 [You see the key inside the locker, thinking I sure do like collecting these keys.]
 
 
 SCAN(500)
