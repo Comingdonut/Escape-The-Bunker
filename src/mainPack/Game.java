@@ -31,17 +31,17 @@ public class Game {
 		Item counter = new Item("Counter", "Counter Top", 20);
 		Item box = new Item("Box", "", 21);
 		Item tv = new Item("TV", "Television", 22);
-		
+
 		ArrayList<Item> use = new ArrayList<>(Arrays.asList(distKey, storKey, classKey, lswitch, arcade));
 		ArrayList<Item> take = new ArrayList<>(Arrays.asList(pin, driver, brick));
 		ArrayList<Item> look = new ArrayList<>(Arrays.asList(arcade, couch, bigTable, table, longTable, counter, tv));
 		ArrayList<Item> open = new ArrayList<>(Arrays.asList(bunkerDoor, storDoor, classDoor, lDrawer, rDrawer, bDrawer));
 		ArrayList<Item> breakA = new ArrayList<>(Arrays.asList(window));
 		ArrayList<Item> pickLock = new ArrayList<>(Arrays.asList(pin, driver));
-		
+
 		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(brick, distKey, pin, driver, storKey, classKey, box));
 		ArrayList<Item> available = new ArrayList<>(Arrays.asList(lswitch, arcade, couch, bigTable, table, longTable, bunkerDoor, classDoor, window, lDrawer, rDrawer, bDrawer, counter, tv));
-		
+
 		actionables.put(Action.TAKE, take);
 		actionables.put(Action.PICKUP, take);
 		actionables.put(Action.USE, use);
@@ -51,17 +51,19 @@ public class Game {
 		actionables.put(Action.BREAK, breakA);
 		actionables.put(Action.PICKUP, take);
 		actionables.put(Action.PICKLOCK, pickLock);	
-		
+
 		bunker = new Room(actionables, hidden, available);
-		
+
+		DialogueParser.readDialogue("../../OverallDialogue-Bunker.txt");
+
 		return bunker;	
 	}
 	private Room createClassRoom(){
-		
+
 		Room classRoom = null;
-		
+
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
-		
+
 		Item clock = new Item("Clock", "", 1);
 		Item desk = new Item("Desk", "", 2);
 		Item table =new Item("Tables", "Table", 3);
@@ -70,7 +72,7 @@ public class Game {
 		Item classDoor = new Item("Classroom Door", "Classroom", 6);
 		Item cloth = new Item("Cloth", "Towel", 7);
 		Item classKey = new Item("ClassKey", "Class Key", 8);
-		
+
 		ArrayList<Item> pickUp = new ArrayList<>(Arrays.asList(cloth));
 		ArrayList<Item> lookAt = new ArrayList<>(Arrays.asList(locker, clock, desk));
 		ArrayList<Item> use = new ArrayList<>(Arrays.asList(cloth));
@@ -78,24 +80,26 @@ public class Game {
 
 		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(cloth, classKey));
 		ArrayList<Item> available = new ArrayList<>(Arrays.asList(clock, desk, table, locker, bunkDoor, classDoor));
-		
+
 		actionables.put(Action.PICKUP, pickUp);
 		actionables.put(Action.TAKE, pickUp);
 		actionables.put(Action.INSPECT, lookAt);
 		actionables.put(Action.LOOKAT, lookAt);
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.USE, use);
-		
+
 		classRoom = new Room(actionables, hidden, available);
-		
+
+		DialogueParser.readDialogue("../../OverallDialogue-Classroom.txt");
+
 		return classRoom;	
 	}
 	private Room createCommons(){
-		
+
 		Room commons = null;
-		
+
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
-		
+
 		Item marketKey = new Item("MarketKey", "Market Key", 1);
 		Item desk = new Item("Front Desk", "Desk", 4);
 		Item noodles = new Item("Ramen", "Noodles", 2);
@@ -111,16 +115,16 @@ public class Game {
 		Item frontDoor = new Item("Front Door", "FrontDoor", 13);
 		Item sideDoor = new Item("Side Door", "SideDoor", 14);
 		Item backDoor = new Item("Back Door", "BackDoor", 15);
-		
+
 		ArrayList<Item> pickUp = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey));
 		ArrayList<Item> lookAt = new ArrayList<>(Arrays.asList(note, stickyNote, desk, market, clothes, price));
 		ArrayList<Item> use = new ArrayList<>(Arrays.asList(frontDoor, backDoor, sideDoor, marketKey));
 		ArrayList<Item> open = new ArrayList<>(Arrays.asList(drawer, gate, lock));
 		ArrayList<Item> scan = new ArrayList<>(Arrays.asList(noodles));
-		
+
 		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey, stickyNote, price, lock, note));
 		ArrayList<Item> available = new ArrayList<>(Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
-		
+
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.INSPECT, lookAt);
 		actionables.put(Action.LOOKAT, lookAt);
@@ -129,17 +133,38 @@ public class Game {
 		actionables.put(Action.PICKUP, pickUp);
 		actionables.put(Action.TAKE, pickUp);
 		actionables.put(Action.READ, lookAt);
-		
+
 		commons = new Room(actionables, hidden, available);
-		
+
+		DialogueParser.readDialogue("../../OverallDialogue-Commons.txt");
+
 		return commons;	
 	}
-	
-	
+
+
 	public void run(){
 		//SHTUFF
-		
+		welcome();
+		gameManager();
 	}
-	
+	private void gameManager() {
+		Room currentRoom = createBunker();
+		tutorialPhase();
+
+
+	}
+	private void tutorialPhase() {
+		
+		System.out.println("Tutorial: Type in the keywords below" +
+				"Words in curly braces are commands, words in brackets are valid items." +
+				"End tutorial: Confused or Lost? Enter [help] for commands and key items." +
+				"The door is right next to the switch. (Use Door)");
+
+	}
+	private void welcome() {
+		System.out.println("Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");
+		System.out.println("You'll be starting out in the bunker, and attempt to get out from there.\nLet's get started!");		
+	}
+
 }
 
