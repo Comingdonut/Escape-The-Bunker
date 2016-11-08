@@ -3,6 +3,7 @@ package mainPack;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Validation {
@@ -20,7 +21,7 @@ public class Validation {
 		return action;
 	}
 
-	private Item getItem(String input, List<Item> items){
+	private Item getItem(String input, ArrayList<Item> items){
 		Item item = null;
 		for(Item i : items){
 			if(input.toLowerCase().contains(i.getName1()) || input.toLowerCase().contains(i.getName2())){
