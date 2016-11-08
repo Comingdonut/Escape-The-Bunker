@@ -1,4 +1,4 @@
-Clock(1) Desk(2) Tables(3) Locker(4) BunkerDoor(5) ClassroomDoor(6) Cloth(7) 
+Clock-1 Desk-2 Tables-3 Locker-4 BunkerDoor-5 ClassroomDoor-6 Cloth-7 ClassKey-8
 
 
 
@@ -31,7 +31,7 @@ LOOKAT(400)
 
 
 INSPECT(400)
-404 [You see the key inside the locker, thinking I sure do like collecting these keys.]
+
 
 
 SCAN(500)

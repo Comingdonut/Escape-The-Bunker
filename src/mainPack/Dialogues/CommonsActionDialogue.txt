@@ -1,5 +1,5 @@
-Desk(1) StickNote(2) Drawer(3) TakeKeyFromDesk(4) Market(5) Item(6) Price(7) clothes(8) Paper(9)
-Bar(10)  Door(11) TakeKeyFromDrawer(12) 
+MarketKey-1, Ramen|Noodles-2, SpareKey-3, FrontDesk-4, StickyNote-5, Market|Shop-6, Price|Amount-7, Lock-8, Gate-9,Clothes-10
+Note|Memo-11, Drawer-12, FrontDoor-13, SideDoor-14, BackDoor-15
 
 
 
@@ -7,34 +7,43 @@ USE (100)
 
 
 GOTO (200)
-201 [You approach the desk in curiosity.]
-205 [Your stomach begins to growl which leads you to the market.]
-208 [You approach the clothes, wondering if the next clue will be there...]
-210 [You approach the imaging bar, not expecting much.]
 
 PICKUP (300)
 
 
 
 TAKE (300)
-304 [You pick up the key wondering what it could be for...]
-312 [You pick up the key, thinking you are for sure closer to getting out.]
-306 [You pick up the noodles, realizing they might be a nice little snack.]
+301[You pick up the key, now excited to open the market.]
+303[You pick up the key, thinking you are for sure closer to getting out.]
+302[You pick the noodles,realizing they might make a nice little snack.]
 
 LOOKAT (400)
-407 [The price is $2.94, so you decide to starve.]
+404[The desk looks suprisingly clean except a single sticky note.]
+412[The drawer appears to not actually be locked.]
+406[The market is locked.]
+410[Tons of clothes fill the are, a single piece of paper is visible.]
+408[The gate in front of you is locked.]
 
 INSPECT (400)
-407 [The price is $2.94, so you decide to starve.]
+406[The market contains a Cup of Noodles in the very back of a rack and a self
+checkout machine to scan items.]
 
 SCAN (500)
-506 [You scan the item, wondering if you have enought to buy it.]
+502[You scan the item out of curosity, wondering if you have enough to buy them.]
 
 BREAK (600)
 
 
 OPEN (700)
-703 [You see a key lying inside the drawer.]
+712[You see a key inside of the drawer.]
+713[Opening the door, the fresh cool air hits your face. You walk onto the sidewalk
+relieved, you finally head home.]
+714[Opening the door, the fresh cool air hits your face. You walk onto the sidewalk
+relieved, only find the love of your life in front of you. You walk home together.]
+715[Opening the door, the fresh cool air hits your face. You walk onto the alleyway
+relieved, only to find yourself surrounded by a group of thugs. You turn back only to 
+see the back door close on you. you frantically attempt to open the door multiple times, but
+it was no use. The strangers grabbed you and took you into the darkness.]
 
 EXIT (800)
 
@@ -49,7 +58,7 @@ CLEAN(1100)
 
 
 READ(400)
-407 [The price is $2.94, so you decide to starve.]
-
+411[Here is the spare key you requested for the market. It's under this note.]
+407[The price is $2.94, so you decide to starve.]
 
 
