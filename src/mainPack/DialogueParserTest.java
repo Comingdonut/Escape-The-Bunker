@@ -7,7 +7,7 @@ public class DialogueParserTest {
 	@Test
 	public void test() {
 		DialogueParser parse = new DialogueParser();
-		parse.ReadSpecificLine("C:\\TestFile.txt", 359);
+		parse.readDialogue("C:\\TestFile.txt");
 	}
 
 }
