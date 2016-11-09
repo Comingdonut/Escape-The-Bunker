@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Validation {
 
-	private BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 	private Command command;
 
 	private Action getAction(String input){
 		Action action = null;
 		for(Action a : Action.values()){
-			if(input.contains(a.toString())){
+			if(input.toLowerCase().contains(a.toString().toLowerCase())){
 				action = a;
 			}
 		}
@@ -24,27 +24,39 @@ public class Validation {
 	private Item getItem(String input, ArrayList<Item> items){
 		Item item = null;
 		for(Item i : items){
-			if(input.toLowerCase().contains(i.getName1()) || input.toLowerCase().contains(i.getName2())){
+			if(input.toLowerCase().contains(i.getName1().toLowerCase()) || input.toLowerCase().contains(i.getName2().toLowerCase())){
 				item = i;
 			}
 		}
 		return item;
 	}
 
-	public Command getCommand(Room room){
+	public Command getCommand(Room room, ArrayList<Command> commands){
 		command = null;
 		Action action = null;
 		Item item = null;
 		do{
 			String input = getInput();
-			action = getAction(input);
-			item = getItem(input, room.getAvailable());
-			if(validation(action, item, room)){
-				command = new Command(action, item);
+			if(input.contains("help")){
+				helper(commands);
+			}else{
+				action = getAction(input);
+				item = getItem(input, room.getAvailable());
+				if(validation(action, item, room)){
+					command = new Command(action, item);
+				}
 			}
 		}while(command == null);
 
 		return command;
+	}
+
+	private void helper(ArrayList<Command> commands) {
+		System.out.println("Command List:");
+		for(Command c : commands){
+			System.out.println(c.getAction().toString());
+		}
+
 	}
 
 	private boolean validation(Action action, Item item, Room room){
@@ -67,16 +79,16 @@ public class Validation {
 		}
 		return valid;
 	}
-//	private boolean checkIfInSection(Item item, Room room){
-//		boolean valid = false;
-//		if(room.getRelative().contains(item)){
-//			valid = true;
-//		}else{
-//			IO.printError("Your arms are not long enough.");
-//		}
-//		return valid;
-//	}
-	private String getInput(){
+	//	private boolean checkIfInSection(Item item, Room room){
+	//		boolean valid = false;
+	//		if(room.getRelative().contains(item)){
+	//			valid = true;
+	//		}else{
+	//			IO.printError("Your arms are not long enough.");
+	//		}
+	//		return valid;
+	//	}
+	private static String getInput(){
 		String input = "";
 		System.out.print("> ");
 		try{

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Room {
 
-	private HashMap<Action, ArrayList<Item>> itemsPerAction;
+	private HashMap<Action, ArrayList<Item>> itemsPerAction = new HashMap<Action, ArrayList<Item>>();
 	private ArrayList<Item> hidden;
 //	private ArrayList<Item> relative;
 	private ArrayList<Item> available;

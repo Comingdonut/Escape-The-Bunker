@@ -3,13 +3,14 @@ package mainPack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class Game {
 
 	private Room createBunker(){
 		Room bunker = null;
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
-		Item brick = new Item("Brick", "", 1);
+		Item brick = new Item("Brick", "brick", 1);
 		Item distKey = new Item("Distorted Key", "Warped Key", 4);
 		Item pin = new Item("Bobby Pin", "Pin", 2);
 		Item driver = new Item("Screwdriver", "Screw Driver", 3);
@@ -17,24 +18,24 @@ public class Game {
 		Item classKey = new Item("Classroom Key", "ClassroomKey", 6);
 		Item lswitch = new Item("Light", "Switch", 7);
 		Item arcade = new Item("Arcade", "Machine", 8);
-		Item couch = new Item("Couch", "", 9);
-		Item bigTable =new Item("Big Table", "", 10);
-		Item table = new Item("Table", "", 11);
+		Item couch = new Item("Couch", "couch", 9);
+		Item bigTable =new Item("Big Table", "bTable", 10);
+		Item table = new Item("Table", "table", 11);
 		Item longTable = new Item("Long Table", "LongTable", 12);
 		Item bunkerDoor = new Item("Bunker Door", "BunkerDoor", 13);
 		Item storDoor = new Item("Closet Door", "Closet", 14);
 		Item classDoor = new Item("Class Door", "ClassDoor", 15);
-		Item window = new Item("Window", "", 16);
+		Item window = new Item("Window", "window", 16);
 		Item lDrawer =new Item("Left Drawer", "LeftDrawer", 17);
 		Item rDrawer = new Item("Right Drawer", "RightDrawer", 18);
 		Item bDrawer = new Item("Back Drawer", "BackDrawer", 19);
 		Item counter = new Item("Counter", "Counter Top", 20);
-		Item box = new Item("Box", "", 21);
+		Item box = new Item("Box", "box", 21);
 		Item tv = new Item("TV", "Television", 22);
 
 		ArrayList<Item> use = new ArrayList<>(Arrays.asList(distKey, storKey, classKey, lswitch, arcade));
 		ArrayList<Item> take = new ArrayList<>(Arrays.asList(pin, driver, brick));
-		ArrayList<Item> look = new ArrayList<>(Arrays.asList(arcade, couch, bigTable, table, longTable, counter, tv));
+		ArrayList<Item> look = new ArrayList<>(Arrays.asList(arcade, couch, bigTable, table, longTable, counter, tv, lswitch));
 		ArrayList<Item> open = new ArrayList<>(Arrays.asList(bunkerDoor, storDoor, classDoor, lDrawer, rDrawer, bDrawer));
 		ArrayList<Item> breakA = new ArrayList<>(Arrays.asList(window));
 		ArrayList<Item> pickLock = new ArrayList<>(Arrays.asList(pin, driver));
@@ -54,7 +55,7 @@ public class Game {
 
 		bunker = new Room(actionables, hidden, available);
 
-		DialogueParser.readDialogue("../../OverallDialogue-Bunker.txt");
+		DialogueParser.readDialogue("./OverallDialogue-Bunker");
 
 		return bunker;	
 	}
@@ -141,25 +142,71 @@ public class Game {
 		return commons;	
 	}
 
-
 	public void run(){
 		//SHTUFF
 		welcome();
 		gameManager();
 	}
+	Validation validate = new Validation();
+	private ArrayList<Command> commandHistory = new ArrayList<Command>();
 	private void gameManager() {
 		Room currentRoom = createBunker();
-		tutorialPhase();
-
+		tutorialPhase(currentRoom);
+		story(currentRoom);
 
 	}
-	private void tutorialPhase() {
-		
-		System.out.println("Tutorial: Type in the keywords below" +
-				"Words in curly braces are commands, words in brackets are valid items." +
-				"End tutorial: Confused or Lost? Enter [help] for commands and key items." +
-				"The door is right next to the switch. (Use Door)");
+	private void story(Room currentRoom) {
+		boolean bunkerDone = false;
+		boolean classRoomDone = false;
+		boolean commonsDone = false;
+		while(!bunkerDone){
+			
+			Command com = validate.getCommand(currentRoom, commandHistory);
+			addToHistory(com);
+			
 
+		}
+		if(!classRoomDone){
+			currentRoom = createClassRoom();
+		}
+		while(!classRoomDone){
+
+		}
+		currentRoom = createCommons();
+		while(!commonsDone){
+
+		}
+
+	}
+
+	private void tutorialPhase(Room room) {
+		System.out.println("Tutorial: Type in the keywords below" +
+				"\nWords in curly braces are commands, words in brackets are valid items.");
+		promptTutCommand(Action.LOOKAT, room, "\n{Lookat [light][switch]");
+		promptTutCommand(Action.USE, room, "\n{Use} [light][switch]");
+		System.out.println("End tutorial: Confused or Lost? Enter [help] for commands and key items.");
+	}
+
+	public void promptTutCommand(Action action, Room room, String message){
+		boolean valid = false;
+		while(!valid){
+			System.out.println(message);
+			Command com = validate.getCommand(room, commandHistory);
+			if(com.getAction() != action | (!com.getItem().getName1().equalsIgnoreCase("light") || !com.getItem().getName2().equalsIgnoreCase("switch"))){
+				System.out.println("We're trying to help you get used to the system! Please try again...");
+			}else{
+				valid = true;
+				addToHistory(com);
+				DialogueParser.ReadSpecificLine("./BunkerActionDialogue.txt", com.getAction().getValue() + com.getItem().getValue());
+			}
+		}
+	}
+
+	private void addToHistory(Command com) {
+		if(!commandHistory.contains(com)){
+			commandHistory.add(com);
+		}
+		
 	}
 	private void welcome() {
 		System.out.println("Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");

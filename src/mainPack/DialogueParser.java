@@ -31,7 +31,7 @@ public class DialogueParser {
 		}
 	}
 
-	public void ReadSpecificLine(String fileName, int lineNumber) {
+	public static void ReadSpecificLine(String fileName, int lineNumber) {
 		// This will reference one line at a time
 		String line = null;
 		boolean isDone = false;

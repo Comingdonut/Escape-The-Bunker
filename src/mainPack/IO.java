@@ -7,7 +7,7 @@ public class IO {
 	}
 	
 	public static void printCommandError(Action a, Item b){
-		System.err.println("The command [" + a.toString() + "] is not compatible with [" + b.toString() + "].");
+		System.err.println("The command [" + a.toString() + "] is not compatible with [" + b.getName1() + "].");
 	}
 	
 	public static void printError(String error){

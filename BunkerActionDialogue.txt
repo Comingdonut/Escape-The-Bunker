@@ -1,9 +1,9 @@
-ARCADEMACHINE(1) BRICK[2] Couch(3) BigTable(4) LeftTable(5) RightTable(6) TakeKeyatLeftTable(7)
+ARCADEMACHINE(1) BRICK(2) Couch(3) BigTable(4) LeftTable(5) RightTable(6) TakeKeyatLeftTable(7)
 
-Look at the right table(8) BunkerDoor(9) StorageDoor(10) ClassroomDoor(11) LeftDrawer(12) RightDrawers(13) 
+Look at the right table(8) BunkerDoor(9) StorageDoor(10) ClassroomDoor(11) LeftDrawer(12) RightDrawers(13) Light switch(20)
 
 BackDrawers(14) use the left drawer(15) use key on the right drawers(16) counter top(17) takeakeybehindtv3(18) 
-Exit bunker(19) Clock(20) 
+Exit bunker(19)
 
 
 USE(100) 
@@ -44,11 +44,12 @@ TAKE(300)
 LOOKAT(400) 
 401 [You see the arcade machine, so you decide to examine it.]
 408 [You examine the table.]
-
+420 [Walking to the light, you bump into things, realizing you’re still in the bunker. You reach the light, realizing it’s a light switch.]
 
 INSPECT(400)
 401 [You see the arcade machine, so you decide to examine it.]
 408 [You examine the table.]
+420 [Walking to the light, you bump into things, realizing you’re still in the bunker. You reach the light, realizing it’s a light switch.]
 
 
 SCAN(500)
