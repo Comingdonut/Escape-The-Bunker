@@ -143,7 +143,6 @@ public class Game {
 	}
 
 	public void run(){
-		//SHTUFF
 		welcome();
 		gameManager();
 	}
@@ -153,7 +152,6 @@ public class Game {
 		Room currentRoom = createBunker();
 		tutorialPhase(currentRoom);
 		story(currentRoom);
-
 	}
 	private void story(Room currentRoom) {
 		boolean bunkerDone = false;
@@ -162,8 +160,7 @@ public class Game {
 		while(!bunkerDone){
 			
 			Command com = validate.getCommand(currentRoom, commandHistory);
-			addToHistory(com);
-			
+			addToHistory(com);	
 
 		}
 		if(!classRoomDone){
@@ -176,7 +173,6 @@ public class Game {
 		while(!commonsDone){
 
 		}
-
 	}
 
 	private void tutorialPhase(Room room) {
