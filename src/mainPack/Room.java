@@ -39,6 +39,15 @@ public class Room {
 	public ArrayList<Item> getAvailable() {
 		return available;
 	}
+	
+	public void takeItem(ArrayList<Item> items, int value){
+		for(Item i : items){
+			if(i.getValue() == value){
+				available.add(i);
+				hidden.remove(i);
+			}
+		}
+	}
 
 //	public ArrayList<Item> getBack() {
 //		return back;

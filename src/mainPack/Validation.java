@@ -90,7 +90,7 @@ public class Validation {
 	//	}
 	private static String getInput(){
 		String input = "";
-		System.out.print("> ");
+		System.out.print("\n> ");
 		try{
 			input = read.readLine();
 		}
