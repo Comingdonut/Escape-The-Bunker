@@ -1,10 +1,7 @@
-Desk(1) StickNote(2) Drawer(3) TakeKeyFromDesk(4) Market(5) Item(6) Price(7) clothes(8) Paper(9)
-Bar(10)  Door(11) TakeKeyFromDrawer(12) 
-
-
+MarketKey(1), Desk(2), Noodles(3), SpareKey(4), StickyNote(5), Market(6), Price(7), Lock(8), 
+Gate(9), Clothes(10), Note(11), Drawer(12), FrontDoor(13), SideDoor(14), BackDoor(15)
 
 USE (100)
-
 
 GOTO (200)
 201 [You approach the desk in curiosity.]
@@ -14,42 +11,46 @@ GOTO (200)
 
 PICKUP (300)
 
-
-
 TAKE (300)
-304 [You pick up the key wondering what it could be for...]
-312 [You pick up the key, thinking you are for sure closer to getting out.]
-306 [You pick up the noodles, realizing they might be a nice little snack.]
+301 [You pick up the market key...]
+304 [You pick up the key, thinking you are for sure closer to getting out.]
+303 [You pick up the noodles, realizing they might be a nice little snack.]
 
 LOOKAT (400)
+402 [The desk looks surprisingly clean, besides the lonely stick note.] and 
+[The drawer with the lock is not actually locked.]
+403 [The item left on the rack is Cup-O-Noodles.]
+406 [The market is locked] and [The market contains a single item in the very back of the rack and 
+a selfcheckout machine to scan items.]
 407 [The price is $2.94, so you decide to starve.]
+410 [The gate in front of you is locked] and 
+[Tons of clothes fill the area, a single note is visible.]
+411 [Repair Request: The lock on one of our drawers from the receptionist desk
+ can no longer lock itself properly. We'd like the lock to be fixed or replaced.]
 
 INSPECT (400)
 407 [The price is $2.94, so you decide to starve.]
 
 SCAN (500)
-506 [You scan the item, wondering if you have enought to buy it.]
+503 [You scan the item, wondering if you have enought to buy it. the price shows up on
+ the display]
 
 BREAK (600)
 
 
 OPEN (700)
-703 [You see a key lying inside the drawer.]
+712 [You see a key lying inside the drawer.]
 
 EXIT (800)
 
-
 ESCAPE (900)
-
 
 PICK(1000)
 
-
 CLEAN(1100)
 
-
 READ(400)
-407 [The price is $2.94, so you decide to starve.]
-
-
-
+405[Here is the spare key you requested for the market. It's under this note.]
+407[The price is $2.94, so you decide to starve.]
+411 [Repair Request: The lock on one of our drawers from the receptionist desk
+ can no longer lock itself properly. We'd like the lock to be fixed or replaced.]

@@ -3,7 +3,6 @@ package mainPack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class Game {
 
@@ -145,13 +144,16 @@ public class Game {
 		welcome();
 		gameManager();
 	}
+	
 	Validation validate = new Validation();
 	private ArrayList<Command> commandHistory = new ArrayList<Command>();
+	
 	private void gameManager() {
 		Room currentRoom = createBunker();
 		tutorialPhase(currentRoom);
 		story(currentRoom);
 	}
+	
 	private void story(Room currentRoom) {
 		boolean bunkerDone = false;
 		boolean classRoomDone = false;
@@ -159,10 +161,15 @@ public class Game {
 		while(!bunkerDone){
 
 			Command com = validate.getCommand(currentRoom, commandHistory);
+			//
 			if(com.getItem().getNeeded() != null){
+				//checks if items are contained in the bunker
 				if(currentRoom.getAvailable().contains(com.getItem().getNeeded())){
+					//reads line from file
 					DialogueParser.ReadSpecificLine("./BunkerActionDialogue.txt", com.getAction().getValue() + com.getItem().getValue());
+					//Adds to history
 					addToHistory(com);
+					//if stuff
 					if(com.getAction().getValue() + com.getItem().getValue() == 616){
 						bunkerDone = true;
 						classRoomDone = true;
@@ -176,16 +183,14 @@ public class Game {
 				DialogueParser.ReadSpecificLine("./BunkerActionDialogue.txt", com.getAction().getValue() + com.getItem().getValue());
 				if(com.getAction().getValue() + com.getItem().getValue() == 301){
 					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 301){
+				} else if(com.getAction().getValue() + com.getItem().getValue() == 304){
 					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 301){
+				} else if(com.getAction().getValue() + com.getItem().getValue() == 321){
 					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 301){
+				} else if(com.getAction().getValue() + com.getItem().getValue() == 305){
 					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
 				}
 			}
-
-
 		}
 		if(!classRoomDone){
 			currentRoom = createClassRoom();
@@ -234,6 +239,7 @@ public class Game {
 		}
 
 	}
+	
 	private void welcome() {
 		System.out.println("Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");
 		System.out.println("You'll be starting out in the bunker, and attempt to get out from there.\nLet's get started!");		
