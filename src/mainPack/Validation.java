@@ -39,7 +39,11 @@ public class Validation {
 			String input = getInput();
 			if(input.contains("help")){
 				helper(commands);
-			}else{
+			}
+			else if(input.contains("look around")){
+				System.out.println(room.getDescription());
+			}
+			else{
 				action = getAction(input);
 				item = getItem(input, room.getAvailable());
 				if(validation(action, item, room)){
@@ -72,9 +76,14 @@ public class Validation {
 	}
 	private boolean checkIfValidCombo(Action action, Item item, Room room){
 		boolean valid = false;
-		if(room.getItemsPerAction().get(action).contains(item)){
-			valid = true;
-		}else{
+		if(room.getItemsPerAction().keySet().contains(action)){
+			if(room.getItemsPerAction().get(action).contains(item)){
+				valid = true;
+			}else{
+				IO.printCommandError(action, item);
+			}
+		}
+		else{
 			IO.printCommandError(action, item);
 		}
 		return valid;

@@ -9,36 +9,35 @@ public class Game {
 	private Room createBunker(){
 		Room bunker = null;
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
-		Item brick = new Item("Brick", "brick", 1, null);
-		Item distKey = new Item("Distorted Key", "Warped Key", 4, null);
-		Item pin = new Item("Bobby Pin", "Pin", 2, null);
-		Item storKey = new Item("Storage Key", "StorageKey", 5, null);
-		Item classKey = new Item("Classroom Key", "ClassroomKey", 6, null);
-		Item lswitch = new Item("Light", "Switch", 7, null);
-		Item arcade = new Item("Arcade", "Machine", 8, null);
-		Item couch = new Item("Couch", "couch", 9, null);
-		Item bigTable =new Item("Big Table", "bTable", 10, null);
-		Item table = new Item("Table", "table", 11, null);
-		Item longTable = new Item("Long Table", "LongTable", 12, null);
-		Item storDoor = new Item("Closet Door", "Closet", 14, pin);
-		Item classDoor = new Item("Class Door", "ClassDoor", 15, classKey);
-		Item window = new Item("Window", "window", 16, brick);
-		Item lDrawer =new Item("Left Drawer", "LeftDrawer", 17, null);
-		Item rDrawer = new Item("Right Drawer", "RightDrawer", 18, distKey);
-		Item bDrawer = new Item("Back Drawer", "BackDrawer", 19, null);
-		Item counter = new Item("Counter", "Counter Top", 20, null);
-		Item box = new Item("Box", "box", 21, null);
-		Item tv = new Item("TV", "Television", 22, null);
+		Item brick = new Item("Brick", "brick", 1, null, null);
+		Item distKey = new Item("Distorted Key", "Warped Key", 4, null, null);
+		Item classKey = new Item("Classroom Key", "ClassroomKey", 6, null, null);
+		Item pin = new Item("Bobby Pin", "Pin", 2, null, classKey);
+		Item storKey = new Item("Closet Key", "ClosetKey", 5, null, classKey);
+		Item lswitch = new Item("Light", "Switch", 7, null, null);
+		Item arcade = new Item("Arcade", "Machine", 8, null, brick);
+		Item couch = new Item("Couch", "couch", 9, null, null);
+		Item bigTable =new Item("Big Table", "bTable", 10, null, null);
+		Item table = new Item("Table", "table", 11, null, null);
+		Item longTable = new Item("Long Table", "LongTable", 12, null, distKey);
+		Item storDoor = new Item("Closet Door", "Closet", 14, pin, classKey);
+		Item classDoor = new Item("Class Door", "ClassDoor", 15, classKey, null);
+		Item window = new Item("Window", "window", 16, brick, null);
+		Item lDrawer =new Item("Left Drawer", "LeftDrawer", 17, null, null);
+		Item rDrawer = new Item("Right Drawer", "RightDrawer", 18, distKey, pin);
+		Item box = new Item("Box", "box", 21, null, storKey);
+		Item counter = new Item("Counter", "Counter Top", 20, null, null);
+		Item tv = new Item("TV", "Television", 22, null, box);
 
 		ArrayList<Item> use = new ArrayList<>(Arrays.asList(distKey, storKey, classKey, lswitch, arcade));
-		ArrayList<Item> take = new ArrayList<>(Arrays.asList(pin, brick));
+		ArrayList<Item> take = new ArrayList<>(Arrays.asList(pin, brick, box, storKey, distKey, classKey));
 		ArrayList<Item> look = new ArrayList<>(Arrays.asList(arcade, couch, bigTable, table, longTable, counter, tv, lswitch));
-		ArrayList<Item> open = new ArrayList<>(Arrays.asList(storDoor, classDoor, lDrawer, rDrawer, bDrawer));
+		ArrayList<Item> open = new ArrayList<>(Arrays.asList(storDoor, classDoor, lDrawer, rDrawer));
 		ArrayList<Item> breakA = new ArrayList<>(Arrays.asList(window));
 		ArrayList<Item> pickLock = new ArrayList<>(Arrays.asList(pin));
 
 		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(brick, distKey, pin, storKey, classKey, box));
-		ArrayList<Item> available = new ArrayList<>(Arrays.asList(lswitch, arcade, couch, bigTable, table, longTable, classDoor, window, lDrawer, rDrawer, bDrawer, counter, tv));
+		ArrayList<Item> available = new ArrayList<>(Arrays.asList(lswitch, arcade, couch, bigTable, table, longTable, classDoor, window, rDrawer, lDrawer, counter, tv));
 
 		actionables.put(Action.TAKE, take);
 		actionables.put(Action.PICKUP, take);
@@ -51,8 +50,12 @@ public class Game {
 		actionables.put(Action.PICKLOCK, pickLock);	
 
 		bunker = new Room(actionables, hidden, available);
-
-		DialogueParser.readDialogue("./OverallDialogue-Bunker");
+		bunker.setDescription("To the left, there is a countertop with a TV and under it are two separate drawers, one on the left, and one on the right.\n" + 
+				"Near the entrance is the arcade machine, and a big table.\n" + 
+				"In the left side there is a long table and in the right side is a single table.\n" +
+				"In the back of the room, there is couch, closet door and a classroom door.\n" +
+				"There is a window next to the bunker door.\n");
+				DialogueParser.readDialogue("./OverallDialogue-Bunker");
 
 		return bunker;	
 	}
@@ -62,13 +65,13 @@ public class Game {
 
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
 
-		Item cloth = new Item("Cloth", "Towel", 7, null);
-		Item clock = new Item("Clock", "", 1, cloth);
-		Item desk = new Item("Desk", "", 2, null);
-		Item table = new Item("Tables", "Table", 3, null);
-		Item locker = new Item("Locker", "Cabinet", 4, null);
-		Item classKey = new Item("ClassKey", "Class Key", 8, null);
-		Item classDoor = new Item("Classroom Door", "Classroom", 6, classKey);
+		Item cloth = new Item("Cloth", "Towel", 7, null, null);
+		Item clock = new Item("Clock", "", 1, cloth, null);
+		Item desk = new Item("Desk", "", 2, null, cloth);
+		Item table = new Item("Tables", "Table", 3, null, null);
+		Item classKey = new Item("ClassKey", "Class Key", 8, null, null);
+		Item locker = new Item("Locker", "Cabinet", 4, null,classKey);
+		Item classDoor = new Item("Classroom Door", "Classroom", 6, classKey, null);
 
 
 
@@ -88,7 +91,7 @@ public class Game {
 		actionables.put(Action.USE, use);
 
 		classRoom = new Room(actionables, hidden, available);
-
+		classRoom.setDescription("");//TODO:***************************************************
 		DialogueParser.readDialogue("../../OverallDialogue-Classroom.txt");
 
 		return classRoom;	
@@ -99,21 +102,21 @@ public class Game {
 
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
 
-		Item marketKey = new Item("MarketKey", "Market Key", 1, null);
-		Item desk = new Item("Front Desk", "Desk", 4, null);
-		Item noodles = new Item("Ramen", "Noodles", 2, null);
-		Item spareKey = new Item("Spare Key", "SpareKey", 3, null);
-		Item stickyNote = new Item("Sticky Note", "Sticky", 5, null);
-		Item market = new Item("Market", "Shop", 6, marketKey);
-		Item price = new Item("Price", "Amount", 7, null);
-		Item lock = new Item("Lock", "", 8, null);
-		Item gate = new Item("Gate", "", 9, null);
-		Item clothes =new Item("Clothes", "", 10, null);
-		Item note = new Item("Note", "Memo", 11, null);
-		Item drawer = new Item("Drawer", "", 12, null);
-		Item frontDoor = new Item("Front Door", "FrontDoor", 13, spareKey);
-		Item sideDoor = new Item("Side Door", "SideDoor", 14, spareKey);
-		Item backDoor = new Item("Back Door", "BackDoor", 15, spareKey);
+		Item marketKey = new Item("MarketKey", "Market Key", 1, null, null);
+		Item desk = new Item("Front Desk", "Desk", 4, null, null);
+		Item noodles = new Item("Ramen", "Noodles", 2, null, null);
+		Item spareKey = new Item("Spare Key", "SpareKey", 3, null, null);
+		Item stickyNote = new Item("Sticky Note", "Sticky", 5, null, marketKey);
+		Item market = new Item("Market", "Shop", 6, marketKey, noodles);
+		Item price = new Item("Price", "Amount", 7, null, null);
+		Item lock = new Item("Lock", "", 8, null, null);
+		Item gate = new Item("Gate", "", 9, null, null);
+		Item note = new Item("Note", "Memo", 11, null, null);
+		Item clothes =new Item("Clothes", "", 10, null, note);
+		Item drawer = new Item("Drawer", "", 12, null, spareKey);
+		Item frontDoor = new Item("Front Door", "FrontDoor", 13, spareKey, null);
+		Item sideDoor = new Item("Side Door", "SideDoor", 14, spareKey, null);
+		Item backDoor = new Item("Back Door", "BackDoor", 15, spareKey, null);
 
 		ArrayList<Item> pickUp = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey));
 		ArrayList<Item> lookAt = new ArrayList<>(Arrays.asList(note, stickyNote, desk, market, clothes, price));
@@ -121,8 +124,8 @@ public class Game {
 		ArrayList<Item> open = new ArrayList<>(Arrays.asList(drawer, gate, lock));
 		ArrayList<Item> scan = new ArrayList<>(Arrays.asList(noodles));
 
-		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey, stickyNote, price, lock, note));
-		ArrayList<Item> available = new ArrayList<>(Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
+		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey,  price, lock, note));
+		ArrayList<Item> available = new ArrayList<>(Arrays.asList(backDoor, sideDoor, stickyNote, frontDoor, desk, market, gate, drawer));
 
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.INSPECT, lookAt);
@@ -134,7 +137,7 @@ public class Game {
 		actionables.put(Action.READ, lookAt);
 
 		commons = new Room(actionables, hidden, available);
-
+		commons.setDescription("");//TODO:***************************************************
 		DialogueParser.readDialogue("../../OverallDialogue-Commons.txt");
 
 		return commons;	
@@ -144,20 +147,21 @@ public class Game {
 		welcome();
 		gameManager();
 	}
-	
+
 	Validation validate = new Validation();
 	private ArrayList<Command> commandHistory = new ArrayList<Command>();
-	
+
 	private void gameManager() {
 		Room currentRoom = createBunker();
 		tutorialPhase(currentRoom);
 		story(currentRoom);
 	}
-	
+
 	private void story(Room currentRoom) {
 		boolean bunkerDone = false;
 		boolean classRoomDone = false;
 		boolean commonsDone = false;
+		int[] values = {108, 105, 301, 304, 321, 412, 422, 702, 718};
 		while(!bunkerDone){
 
 			Command com = validate.getCommand(currentRoom, commandHistory);
@@ -181,14 +185,10 @@ public class Game {
 				}
 			}else{
 				DialogueParser.ReadSpecificLine("./BunkerActionDialogue.txt", com.getAction().getValue() + com.getItem().getValue());
-				if(com.getAction().getValue() + com.getItem().getValue() == 301){
-					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 304){
-					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 321){
-					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
-				} else if(com.getAction().getValue() + com.getItem().getValue() == 305){
-					currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getValue());
+				for(int i : values){
+					if(com.getAction().getValue() + com.getItem().getValue() == i){
+						currentRoom.takeItem(currentRoom.getHidden(), com.getItem().getContained());
+					}
 				}
 			}
 		}
@@ -207,9 +207,10 @@ public class Game {
 	private void tutorialPhase(Room room) {
 		System.out.println("Tutorial: Type in the keywords below" +
 				"\nWords in curly braces are commands, words in brackets are valid items.");
-		promptTutCommand(Action.LOOKAT, room, "\n{Lookat [light][switch]");
+		promptTutCommand(Action.LOOKAT, room, "\n{Lookat} [light][switch]");
 		promptTutCommand(Action.USE, room, "\n{Use} [light][switch]");
-		System.out.println("End tutorial: Confused or Lost? Enter [help] for commands and key items.");
+		System.out.println("\nEnd tutorial: Confused or Lost? Enter [help] for commands and key items.");
+		System.out.println("Want to take a look around? Enter [look around] for a desciption of the room.");
 	}
 
 	public void promptTutCommand(Action action, Room room, String message){
@@ -239,7 +240,7 @@ public class Game {
 		}
 
 	}
-	
+
 	private void welcome() {
 		System.out.println("Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");
 		System.out.println("You'll be starting out in the bunker, and attempt to get out from there.\nLet's get started!");		

@@ -12,6 +12,7 @@ public class Room {
 //	private ArrayList<Item> back;	
 //	private ArrayList<Item> mid;
 //	private ArrayList<Item> front;
+	private String description;
 
 	public Room(HashMap<Action, ArrayList<Item>> itemsPerAction, ArrayList<Item> hidden, /*ArrayList<Item> relative,*/ ArrayList<Item> available/*, ArrayList<Item> back, ArrayList<Item> mid, ArrayList<Item> front*/){
 		this.itemsPerAction = itemsPerAction;
@@ -39,12 +40,16 @@ public class Room {
 		return available;
 	}
 	
-	public void takeItem(ArrayList<Item> items, int value){
+	public void takeItem(ArrayList<Item> items, Item value){
+		ArrayList<Item> removeList = new ArrayList<Item>();
 		for(Item i : items){
-			if(i.getValue() == value){
+			if(i.equals(value)){
 				available.add(i);
-				hidden.remove(i);
+				removeList.add(i);
 			}
+		}
+		for(Item i : removeList){
+			hidden.remove(i);
 		}
 	}
 
@@ -71,5 +76,13 @@ public class Room {
 //	public void moveToSection(Item move) throws Exception{
 //		relative = back.contains(move) ? back : mid.contains(move) ? mid : front;
 //	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }
