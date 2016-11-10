@@ -19,7 +19,7 @@ LOOKAT(400)
 0401 [The clock is dirty, it's hard to see the time.]
 0402 [There is a piece of cloth inside the desk.]
 0403 [All the tables are empty, so it's best to ignore them.]
-0404 [The locker has a lock on it, it appears to only accept four digits between 0 - 9...]
+0404 [The locker has a lock on it, it appears to only accept digits between 0 - 9...]
 0406 [The door appears locked.]
 
 INSPECT(400)

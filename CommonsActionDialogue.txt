@@ -1,40 +1,48 @@
-MarketKey(1), Desk(2), Noodles(3), SpareKey(4), StickyNote(5), Market(6), Price(7), Lock(8), 
-Gate(9), Clothes(10), Note(11), Drawer(12), FrontDoor(13), SideDoor(14), BackDoor(15)
+(MARKET)Key(1), (DESK)(2), (NOODLES)(3), (SPAREKEY)(4), Sticky(NOTE)(5), (MARKET)(6),
+(GATE)(9), (CLOTHES)(10), (NOTE)(11), (DRAWER)(12), (FRONT DOOR)(13), SideDoor(14), BackDoor(15)
 
 USE (100)
+0101 [The (MARKET) door slides left. The (MARKET) contains a single Cup-O-(NOODLES) in the very back of the rack and 
+     a self-checkout machine to scan items.]
 
 GOTO (200)
 
 PICKUP (300)
 
 TAKE (300)
-301 [You pick up the market key...]
-304 [You pick up the key, thinking you are for sure closer to getting out.]
-303 [You pick up the noodles, realizing they might be a nice little snack.]
+0301 [You pick up the (MARKET) key...]
+0304 [You pick up the key, thinking you are for sure closer to getting out.]
+0303 [You pick up the (NOODLES), realizing they might be a nice little snack.]
 
 LOOKAT (400)
-402 [The desk looks surprisingly clean, besides the lonely sticky note.]
-403 [The item left on the rack is Cup-O-Noodles.]
-406 [The market is locked] and [The market contains a single item in the very back of the rack and 
-a selfcheckout machine to scan items.]
-407 [The price is $2.94, so you decide to starve.]
-410 [The gate in front of you is locked] and 
-[Tons of clothes fill the area, a single note is visible.]
-411 [Repair Request: The lock on one of our drawers from the receptionist desk
- can no longer lock itself properly. We'd like the lock to be fixed or replaced.]
+0402 [The (DESK) looks surprisingly clean, besides the lonely (STICKY NOTE).]
+0409 [The (GATE) is locked and requires a passcode.]
+0410 [Tons of (CLOTHES) fill the area, a single (NOTE) is visible.]
+0411 [Repair Request: The lock on one of our (DRAWER)s from the receptionist (DESK) 
+      can no longer lock itself properly. We'd like the lock to be fixed or replaced.]
 
 INSPECT (400)
-407 [The price is ]
+0407 [The price is ]
 
 SCAN (500)
-503 [You scan the item, wondering if you have enought to buy it. the price shows up on
- the display]
+0503 [You scan the (NOODLES), wondering if you have enough to buy it. the price shows up on 
+     the display: ]
 
 BREAK (600)
 
 
 OPEN (700)
-712 [You see a key lying inside the drawer.]
+0706 [The (MARKET) door slides left. The (MARKET) contains a single Cup-O-(NOODLES) in the very back of the rack and 
+a self-checkout machine to scan items.]
+0709 [It prompts you for a passcode.]
+0712 [You see a (SPARE KEY) lying inside the (DRAWER).]
+0713 [Opening the door, the fresh cool air hits your face. You walk onto the sidewalk relieved, you finally head home.]
+0714 [Opening the door, the fresh cool air hits your face. You walk onto the sidewalk relieved, only to find the love 
+      of your life in front of you. You walk home together.]
+0715 [Opening the door, the fresh cool air hits your face. You walk onto the alleyway relieved, only to find yourself 
+      surrounded by a group of thugs. You turn back only to see the back door close on you. You frantically attempt to open 
+      the door multiple times, but it was no use. The strangers grabbed you and take you into the darkness.]
+
 
 EXIT (800)
 
@@ -45,7 +53,6 @@ PICK(1000)
 CLEAN(1100)
 
 READ(400)
-405[Here is the spare key you requested for the market. It's under this note.]
-407[The price is $2.94, so you decide to starve.]
-411 [Repair Request: The lock on one of our drawers from the receptionist desk
- can no longer lock itself properly. We'd like the lock to be fixed or replaced.]
+0405 [Here is the (MARKET KEY) you requested. It's under this (STICKY NOTE).]
+0411 [Repair Request: The lock on one of our (DRAWER)s from the receptionist (DESK) 
+     can no longer lock itself properly. We'd like the lock to be fixed or replaced.]

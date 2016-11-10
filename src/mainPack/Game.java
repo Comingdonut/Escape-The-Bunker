@@ -104,39 +104,37 @@ public class Game {
 		return classRoom;
 	}
 
+	private Item note = new Item("Note", "Memo", 11, null, null);
+	private Item clothes = new Item("Clothes", "clothes", 10, null, note);
+	
 	private Room createCommons() {
 
 		Room commons = null;
 
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
 
-		Item marketKey = new Item("MarketKey", "Market Key", 1, null, null);
+		Item noodles = new Item("Ramen", "Noodles", 3, null, null);
+		Item marketKey = new Item("MarketKey", "Market Key", 1, null, noodles);
 		Item stickyNote = new Item("Sticky Note", "Sticky", 5, null, marketKey);
-		Item desk = new Item("Front Desk", "Desk", 4, null, stickyNote);
-		Item noodles = new Item("Ramen", "Noodles", 2, null, null);
-		Item spareKey = new Item("Spare Key", "SpareKey", 3, null, null);
-
+		Item desk = new Item("Front Desk", "Desk", 2, null, stickyNote);
+		Item spareKey = new Item("Spare Key", "SpareKey", 4, null, null);
 		Item market = new Item("Market", "Shop", 6, marketKey, noodles);
-		Item price = new Item("Price", "Amount", 7, null, null);
-		Item lock = new Item("Lock", "lock", 8, null, null);
-		Item gate = new Item("Gate", "gate", 9, null, null);
-		Item note = new Item("Note", "Memo", 11, null, null);
-		Item clothes = new Item("Clothes", "clothes", 10, null, note);
+		Item gate = new Item("Gate", "gate", 9, null, clothes);
 		Item drawer = new Item("Drawer", "drawer", 12, null, spareKey);
 		Item frontDoor = new Item("Front Door", "FrontDoor", 13, spareKey, null);
 		Item sideDoor = new Item("Side Door", "SideDoor", 14, spareKey, null);
 		Item backDoor = new Item("Back Door", "BackDoor", 15, spareKey, null);
 
 		ArrayList<Item> pickUp = new ArrayList<>(Arrays.asList(marketKey, noodles, spareKey));
-		ArrayList<Item> lookAt = new ArrayList<>(Arrays.asList(note, stickyNote, desk, market, clothes, price));
-		ArrayList<Item> use = new ArrayList<>(Arrays.asList(frontDoor, backDoor, sideDoor, marketKey));
-		ArrayList<Item> open = new ArrayList<>(Arrays.asList(drawer, gate, lock));
+		ArrayList<Item> lookAt = new ArrayList<>(Arrays.asList(note, stickyNote, desk, clothes, gate));
+		ArrayList<Item> use = new ArrayList<>(Arrays.asList(marketKey));
+		ArrayList<Item> open = new ArrayList<>(Arrays.asList(frontDoor, backDoor, sideDoor, drawer, gate, market));
 		ArrayList<Item> scan = new ArrayList<>(Arrays.asList(noodles));
 
 		ArrayList<Item> hidden = new ArrayList<>(
-				Arrays.asList(marketKey, noodles, spareKey, price, lock, note, stickyNote));
+		Arrays.asList(marketKey, noodles, spareKey, note, stickyNote, clothes));
 		ArrayList<Item> available = new ArrayList<>(
-				Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
+		Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
 
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.INSPECT, lookAt);
@@ -148,8 +146,12 @@ public class Game {
 		actionables.put(Action.READ, lookAt);
 
 		commons = new Room(actionables, hidden, available);
-		commons.setDescription("");// TODO:***************************************************
-		DialogueParser.readDialogue("../../OverallDialogue-Commons.txt");
+		commons.setDescription("There is the reception’s desk near the entrance.\n" +
+				"The Avanti market is locked.\n" +
+				"There are clothes for sale behind a locked gate.\n" +
+				"The rest of the commons is filled with tables and chairs, except the imaging bar.\n" +
+				"There are three doors, the front door, the side door, and the back door.\n");
+		DialogueParser.readDialogue("./OverallDialogue-Commons");
 
 		return commons;
 	}
@@ -164,60 +166,83 @@ public class Game {
 
 	private void gameManager() {
 		Room currentRoom = createBunker();
-		// tutorialPhase(currentRoom);
+		//tutorialPhase(currentRoom);
 		story(currentRoom);
 	}
 
 	private void story(Room currentRoom) {
-		boolean bunkerDone = false;
-		boolean classRoomDone = false;
+//		boolean bunkerDone = false;
+//		boolean classRoomDone = false;
 		boolean commonsDone = false;
-		int[] bunkerValues = { 108, 104, 105, 301, 304, 321, 412, 422, 702, 718, 1014 };
-		int[] classRoomValues = { 402, 704 };
-		int[] commonsValues = {};
-		int hour = 0;
-		int minute = 0;
-		while (!bunkerDone) {
+//		int[] bunkerValues = { 108, 104, 105, 301, 304, 321, 412, 422, 702, 718, 1014 };
+//		int[] classRoomValues = { 402, 704 };
+		int[] commonsValues = {709, 405, 402, 712, 706, 101, 410};
+//		int hour = 0;
+//		int minute = 0;
+//		while (!bunkerDone) {
+//
+//			Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
+//
+//			if (com.getAction().getValue() + com.getItem().getValue() == 616) {
+//				bunkerDone = true;
+//				classRoomDone = true;
+//			} else if (com.getAction().getValue() + com.getItem().getValue() == 106) {
+//				bunkerDone = true;
+//			}
+//		}
+//		if (!classRoomDone) {
+//			currentRoom = createClassRoom();
+//			Random rand = new Random();
+//			hour = rand.nextInt(12) + 1;
+//			minute = rand.nextInt(60);
+//		}
+//
+//		while (!classRoomDone) {
+//			Command com = playRoom("./ClassroomActionDialogue.txt", classRoomValues, currentRoom);
+//			if (com.getAction().getValue() + com.getItem().getValue() == 107) {
+//				System.out.println(hour + ":" + minute);
+//			}
+//			if (com.getAction().getValue() + com.getItem().getValue() == 704) {
+//				System.out.println("Enter here: ");
+//				String input = Validation.getInput();
+//				String passcode = "" + hour + minute;
+//				if (passcode.equals(input)) {
+//					System.out.println("You open the locker and see a key inside.");
+//					currentRoom.takeItem(currentRoom.getHidden(), key);
+//				} else {
+//					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
+//				}
+//			}
+//			if (com.getAction().getValue() + com.getItem().getValue() == 105) {
+//				classRoomDone = true;
+//			}
+//		}
+		currentRoom = createCommons();
 
-			Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
+		Random rand = new Random();
+		int dollar = rand.nextInt(2) + 1;
+		int cents = rand.nextInt(100);
+		
+		while (!commonsDone) {
+			Command com = playRoom("./CommonsActionDialogue.txt", commonsValues, currentRoom);
 
-			if (com.getAction().getValue() + com.getItem().getValue() == 616) {
-				bunkerDone = true;
-				classRoomDone = true;
-			} else if (com.getAction().getValue() + com.getItem().getValue() == 106) {
-				bunkerDone = true;
+			if (com.getAction().getValue() + com.getItem().getValue() == 503) {
+				System.out.println("$" + dollar + "." + cents);
 			}
-		}
-		if (!classRoomDone) {
-			currentRoom = createClassRoom();
-			Random rand = new Random();
-			hour = rand.nextInt(12) + 1;
-			minute = rand.nextInt(60);
-		}
-
-		while (!classRoomDone) {
-			Command com = playRoom("./ClassroomActionDialogue.txt", classRoomValues, currentRoom);
-			if (com.getAction().getValue() + com.getItem().getValue() == 107) {
-				System.out.println(hour + ":" + minute);
-			}
-			if (com.getAction().getValue() + com.getItem().getValue() == 704) {
+			if (com.getAction().getValue() + com.getItem().getValue() == 709) {
 				System.out.println("Enter here: ");
 				String input = Validation.getInput();
-				String passcode = "" + hour + minute;
+				String passcode = "" + dollar + cents;
 				if (passcode.equals(input)) {
-					System.out.println("You open the locker and see a key inside.");
-					currentRoom.takeItem(currentRoom.getHidden(), key);
+					System.out.println("You open the gate and see a butt ton of clothes inside.");
+					currentRoom.takeItem(currentRoom.getHidden(), clothes);
 				} else {
 					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
 				}
 			}
-			if (com.getAction().getValue() + com.getItem().getValue() == 105) {
-				classRoomDone = true;
+			if (com.getAction().getValue() + com.getItem().getValue() == 713 || com.getAction().getValue() + com.getItem().getValue() == 714 || com.getAction().getValue() + com.getItem().getValue() == 715) {
+				commonsDone = true;
 			}
-		}
-		currentRoom = createCommons();
-		while (!commonsDone) {
-			Command com = playRoom("./CommonsActionDialogue.txt", commonsValues, currentRoom);
 		}
 	}
 
