@@ -50,7 +50,7 @@ public class DialogueParser {
 					boolean nextLine = false;
 					try {
 						// Stores the line number into a string
-						String num = line.substring(0, 3);
+						String num = line.substring(0, 4);
 
 						// Converts line number into a int
 						currentNumber = Integer.parseInt(num);
@@ -62,8 +62,8 @@ public class DialogueParser {
 					// Checks if current line number is equal to desired line
 					// number
 					if (currentNumber == lineNumber || (nextLine == true)) {
-						// First 5 characters of the desired line are removed
-						line = line.substring(5);
+						// First 6 characters of the desired line are removed
+						line = line.substring(6);
 
 						index++;
 						char[] newLine = line.toCharArray();

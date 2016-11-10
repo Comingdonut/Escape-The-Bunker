@@ -4,10 +4,6 @@ Gate(9), Clothes(10), Note(11), Drawer(12), FrontDoor(13), SideDoor(14), BackDoo
 USE (100)
 
 GOTO (200)
-201 [You approach the desk in curiosity.]
-205 [Your stomach begins to growl which leads you to the market.]
-208 [You approach the clothes, wondering if the next clue will be there...]
-210 [You approach the imaging bar, not expecting much.]
 
 PICKUP (300)
 
@@ -17,8 +13,7 @@ TAKE (300)
 303 [You pick up the noodles, realizing they might be a nice little snack.]
 
 LOOKAT (400)
-402 [The desk looks surprisingly clean, besides the lonely stick note.] and 
-[The drawer with the lock is not actually locked.]
+402 [The desk looks surprisingly clean, besides the lonely sticky note.]
 403 [The item left on the rack is Cup-O-Noodles.]
 406 [The market is locked] and [The market contains a single item in the very back of the rack and 
 a selfcheckout machine to scan items.]
@@ -29,7 +24,7 @@ a selfcheckout machine to scan items.]
  can no longer lock itself properly. We'd like the lock to be fixed or replaced.]
 
 INSPECT (400)
-407 [The price is $2.94, so you decide to starve.]
+407 [The price is ]
 
 SCAN (500)
 503 [You scan the item, wondering if you have enought to buy it. the price shows up on

@@ -13,7 +13,7 @@ public enum Action {
 	OPEN (700),
 	EXIT (800),
 	ESCAPE (900),
-	PICKLOCK(1000),
+	PICK(1000),
 	CLEAN(1100),
 	READ(400);
 	

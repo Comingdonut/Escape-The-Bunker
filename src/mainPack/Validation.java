@@ -97,7 +97,7 @@ public class Validation {
 	//		}
 	//		return valid;
 	//	}
-	private static String getInput(){
+	public static String getInput(){
 		String input = "";
 		System.out.print("\n> ");
 		try{
