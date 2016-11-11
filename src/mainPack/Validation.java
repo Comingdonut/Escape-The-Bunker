@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Validation {
@@ -11,14 +12,23 @@ public class Validation {
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 	private Command command;
 
-	private Action getAction(String input){
+	private Action getAction(String input, HashMap<Action, ArrayList<Item>> actionable){
 		Action action = null;
-		for(Action a : Action.values()){
-			if(input.toLowerCase().contains(a.toString().toLowerCase())){
+		for(Action a : actionable.keySet()){
+			if(input.toLowerCase().contains(a.toString().toLowerCase()) || 
+					input.toLowerCase().contains(splitAction(a).toLowerCase())){
 				action = a;
 			}
 		}
 		return action;
+	}
+
+	private String splitAction(Action a) {
+		String splitAction = "NONE";
+			if(a.toString().contains("_")){
+				splitAction = a.toString().replace('_', ' ');
+			}	
+		return splitAction;
 	}
 
 	private Item getItem(String input, ArrayList<Item> items){
@@ -31,20 +41,20 @@ public class Validation {
 		return item;
 	}
 
-	public Command getCommand(Room room, ArrayList<Command> commands){
+	public Command getCommand(Room room, HashMap<Action, ArrayList<Item>> actionable){
 		command = null;
 		Action action = null;
 		Item item = null;
 		do{
 			String input = getInput();
 			if(input.contains("help")){
-				helper(commands);
+				helper(actionable);
 			}
 			else if(input.contains("look around")){
 				System.out.println(room.getDescription());
 			}
 			else{
-				action = getAction(input);
+				action = getAction(input, actionable);
 				item = getItem(input, room.getAvailable());
 				if(validation(action, item, room)){
 					command = new Command(action, item);
@@ -55,10 +65,10 @@ public class Validation {
 		return command;
 	}
 
-	private void helper(ArrayList<Command> commands) {
+	private void helper(HashMap<Action, ArrayList<Item>> actionable) {
 		System.out.println("Command List:");
-		for(Command c : commands){
-			System.out.println(c.getAction().toString() + " " + c.getItem().getName1());
+		for(Action a : actionable.keySet()){
+			System.out.println(a.toString());
 		}
 
 	}

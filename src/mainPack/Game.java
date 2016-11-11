@@ -8,12 +8,12 @@ import java.util.Random;
 public class Game {
 
 	private int highScore = 103750;
-	
+
 	private Room createBunker() {
 		Room bunker = null;
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
 		Item brick = new Item("Brick", "brick", 1, null, null);
-		Item classKey = new Item("Classroom Key", "ClassroomKey", 6, null, null);
+		Item classKey = new Item("Classroom Key", "Class Key", 6, null, null);
 		Item pin = new Item("Bobby Pin", "Pin", 2, null, classKey);
 		Item distKey = new Item("Distorted Key", "Warped Key", 4, null, pin);
 		Item storKey = new Item("Closet Key", "ClosetKey", 5, null, classKey);
@@ -36,7 +36,7 @@ public class Game {
 		ArrayList<Item> take = new ArrayList<>(Arrays.asList(pin, brick, box, storKey, distKey, classKey));
 		ArrayList<Item> look = new ArrayList<>(
 				Arrays.asList(arcade, couch, bigTable, table, longTable, counter, tv, lswitch));
-		ArrayList<Item> open = new ArrayList<>(Arrays.asList(storDoor, classDoor, lDrawer, rDrawer));
+		ArrayList<Item> open = new ArrayList<>(Arrays.asList(classDoor, lDrawer, rDrawer));
 		ArrayList<Item> breakA = new ArrayList<>(Arrays.asList(window));
 		ArrayList<Item> pick = new ArrayList<>(Arrays.asList(storDoor));
 
@@ -45,13 +45,13 @@ public class Game {
 				classDoor, window, rDrawer, lDrawer, counter, tv, storDoor, classDoor));
 
 		actionables.put(Action.TAKE, take);
-		actionables.put(Action.PICKUP, take);
+		actionables.put(Action.PICK_UP, take);
 		actionables.put(Action.USE, use);
-		actionables.put(Action.LOOKAT, look);
+		actionables.put(Action.LOOK_AT, look);
 		actionables.put(Action.INSPECT, look);
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.BREAK, breakA);
-		actionables.put(Action.PICKUP, take);
+		actionables.put(Action.PICK_UP, take);
 		actionables.put(Action.PICK, pick);
 
 		bunker = new Room(actionables, hidden, available);
@@ -75,7 +75,7 @@ public class Game {
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
 
 		Item cloth = new Item("Cloth", "Towel", 7, null, null);
-		Item clock = new Item("Clock", "clock", 1, null, null);
+		Item clock = new Item("Clock", "clock", 1, cloth, null);
 		Item desk = new Item("Desk", "desk", 2, null, cloth);
 		Item table = new Item("Tables", "Table", 3, null, null);
 		Item locker = new Item("Locker", "Cabinet", 4, null, key);
@@ -89,10 +89,10 @@ public class Game {
 		ArrayList<Item> hidden = new ArrayList<>(Arrays.asList(cloth, key));
 		ArrayList<Item> available = new ArrayList<>(Arrays.asList(clock, desk, table, locker, classDoor));
 
-		actionables.put(Action.PICKUP, pickUp);
+		actionables.put(Action.PICK_UP, pickUp);
 		actionables.put(Action.TAKE, pickUp);
 		actionables.put(Action.INSPECT, lookAt);
-		actionables.put(Action.LOOKAT, lookAt);
+		actionables.put(Action.LOOK_AT, lookAt);
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.USE, use);
 
@@ -108,7 +108,7 @@ public class Game {
 
 	private Item note = new Item("Note", "Memo", 11, null, null);
 	private Item clothes = new Item("Clothes", "clothes", 10, null, note);
-	
+
 	private Room createCommons() {
 
 		Room commons = null;
@@ -134,25 +134,24 @@ public class Game {
 		ArrayList<Item> scan = new ArrayList<>(Arrays.asList(noodles));
 
 		ArrayList<Item> hidden = new ArrayList<>(
-		Arrays.asList(marketKey, noodles, spareKey, note, stickyNote, clothes));
+				Arrays.asList(marketKey, noodles, spareKey, note, stickyNote, clothes));
 		ArrayList<Item> available = new ArrayList<>(
-		Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
+				Arrays.asList(backDoor, sideDoor, frontDoor, desk, market, gate, drawer));
 
 		actionables.put(Action.OPEN, open);
 		actionables.put(Action.INSPECT, lookAt);
-		actionables.put(Action.LOOKAT, lookAt);
+		actionables.put(Action.LOOK_AT, lookAt);
 		actionables.put(Action.USE, use);
 		actionables.put(Action.SCAN, scan);
-		actionables.put(Action.PICKUP, pickUp);
+		actionables.put(Action.PICK_UP, pickUp);
 		actionables.put(Action.TAKE, pickUp);
 		actionables.put(Action.READ, lookAt);
 
 		commons = new Room(actionables, hidden, available);
-		commons.setDescription("There is the reception’s desk near the entrance.\n" +
-				"There is a market.\n" +
-				"There are clothes for sale behind a locked gate.\n" +
-				"The rest of the commons is filled with tables and chairs, except the imaging bar.\n" +
-				"There are three doors, the front door, the side door, and the back door.\n");
+		commons.setDescription("There is the reception’s desk near the entrance.\n" + "There is a market.\n"
+				+ "There are clothes for sale behind a locked gate.\n"
+				+ "The rest of the commons is filled with tables and chairs, except the imaging bar.\n"
+				+ "There are three doors, the front door, the side door, and the back door.\n");
 		DialogueParser.readDialogue("./OverallDialogue-Commons");
 
 		return commons;
@@ -164,7 +163,6 @@ public class Game {
 	}
 
 	Validation validate = new Validation();
-	private ArrayList<Command> commandHistory = new ArrayList<Command>();
 
 	private void gameManager() {
 		Room currentRoom = createBunker();
@@ -180,20 +178,25 @@ public class Game {
 		boolean commonsDone = false;
 		int[] bunkerValues = { 108, 104, 105, 301, 304, 321, 412, 422, 702, 718, 1014 };
 		int[] classRoomValues = { 402, 704 };
-		int[] commonsValues = {709, 405, 402, 712, 706, 101, 410};
+		int[] commonsValues = { 709, 405, 402, 712, 706, 101, 410 };
 		int hour = 0;
 		int minute = 0;
-		while (!bunkerDone) {
-
-			Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
-
-			if (com.getAction().getValue() + com.getItem().getValue() == 616) {
-				bunkerDone = true;
-				classRoomDone = true;
-			} else if (com.getAction().getValue() + com.getItem().getValue() == 106) {
-				bunkerDone = true;
-			}
-		}
+				while (!bunkerDone) {
+		
+					Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
+		
+					if (com.getItem().getNeeded() != null) {
+						if (currentRoom.getAvailable().contains(com.getItem().getNeeded())) {
+							if (com.getAction().getValue() + com.getItem().getValue() == 616) {
+								bunkerDone = true;
+								classRoomDone = true;
+							}
+						}
+					}
+					if (com.getAction().getValue() + com.getItem().getValue() == 106) {
+						bunkerDone = true;
+					}
+				}
 		if (!classRoomDone) {
 			currentRoom = createClassRoom();
 			Random rand = new Random();
@@ -203,6 +206,13 @@ public class Game {
 
 		while (!classRoomDone) {
 			Command com = playRoom("./ClassroomActionDialogue.txt", classRoomValues, currentRoom);
+			if (com.getItem().getNeeded() != null) {
+				if (currentRoom.getAvailable().contains(com.getItem().getNeeded())) {
+					if (com.getAction().getValue() + com.getItem().getValue() == 105) {
+						classRoomDone = true;
+					}
+				}
+			}
 			if (com.getAction().getValue() + com.getItem().getValue() == 107) {
 				System.out.println(hour + ":" + minute);
 			}
@@ -217,21 +227,23 @@ public class Game {
 					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
 				}
 			}
-			if (com.getAction().getValue() + com.getItem().getValue() == 105) {
-				classRoomDone = true;
-			}
 		}
 		currentRoom = createCommons();
 
 		Random rand = new Random();
 		int dollar = rand.nextInt(2) + 1;
 		int cents = rand.nextInt(100);
-		
+
 		while (!commonsDone) {
 			Command com = playRoom("./CommonsActionDialogue.txt", commonsValues, currentRoom);
-
-			if (com.getAction().getValue() + com.getItem().getValue() == 503) {
-				System.out.println("$" + dollar + "." + cents);
+			if (com.getItem().getNeeded() != null) {
+				if (currentRoom.getAvailable().contains(com.getItem().getNeeded())) {
+					if (com.getAction().getValue() + com.getItem().getValue() == 713
+							|| com.getAction().getValue() + com.getItem().getValue() == 714
+							|| com.getAction().getValue() + com.getItem().getValue() == 715) {
+						commonsDone = true;
+					}
+				}
 			}
 			if (com.getAction().getValue() + com.getItem().getValue() == 709) {
 				System.out.println("Enter here: ");
@@ -241,11 +253,12 @@ public class Game {
 					System.out.println("You open the gate and see a butt ton of clothes inside.");
 					currentRoom.takeItem(currentRoom.getHidden(), clothes);
 				} else {
-					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
+					System.out
+					.println("The padlock doesn't respond to the code you entered. It must be wrong.");
 				}
 			}
-			if (com.getAction().getValue() + com.getItem().getValue() == 713 || com.getAction().getValue() + com.getItem().getValue() == 714 || com.getAction().getValue() + com.getItem().getValue() == 715) {
-				commonsDone = true;
+			if (com.getAction().getValue() + com.getItem().getValue() == 503) {
+				System.out.println("$" + dollar + "." + cents);
 			}
 		}
 	}
@@ -253,8 +266,8 @@ public class Game {
 	private void tutorialPhase(Room room) {
 		System.out.println("Tutorial: Type in the keywords below"
 				+ "\nWords in curly braces are commands, words in brackets are valid items.");
-		promptTutCommand(Action.LOOKAT, room, "\n{Lookat} [light][switch]");
-		promptTutCommand(Action.USE, room, "\n{Use} [light][switch]");
+		promptTutCommand(Action.LOOK_AT, room, "\n{Look at} [light] and/or [switch]");
+		promptTutCommand(Action.USE, room, "\n{Use} [light] and/or [switch]");
 		System.out.println("\nEnd tutorial: Confused or Lost? Enter [help] for commands and key items.");
 		System.out.println("Want to take a look around? Enter [look around] for a desciption of the room.");
 	}
@@ -263,50 +276,31 @@ public class Game {
 		boolean valid = false;
 		while (!valid) {
 			System.out.println(message);
-			Command com = validate.getCommand(room, commandHistory);
+			Command com = validate.getCommand(room, room.getItemsPerAction());
 			if (com.getAction() != action | (!com.getItem().getName1().equalsIgnoreCase("light")
 					|| !com.getItem().getName2().equalsIgnoreCase("switch"))) {
 				System.out.println("We're trying to help you get used to the system! Please try again...");
 			} else {
 				valid = true;
-				addToHistory(com);
 				DialogueParser.ReadSpecificLine("./BunkerActionDialogue.txt",
 						com.getAction().getValue() + com.getItem().getValue());
 			}
 		}
 	}
 
-	private void addToHistory(Command com) {
-		boolean exists = false;
-		for (Command c : commandHistory) {
-			if (c.getAction() == com.getAction()) {
-				exists = true;
-			}
-		}
-		if (!exists) {
-			commandHistory.add(com);
-		}
-
-	}
-
 	private void welcome() {
-		System.out.println(
-				"Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");
-		System.out.println(
-				"You'll be starting out in the bunker, and attempt to get out from there.\nLet's get started!");
+		System.out.println("Welcome to Escape the Bunker, a modernized approach to the classic text-based adventure games!");
+		System.out.println("You'll be starting out in the bunker, and attempt to get out from there.\nLet's get started!");
 	}
 
 	private Command playRoom(String dialoguePath, int[] values, Room currentRoom) {
-		Command com = validate.getCommand(currentRoom, commandHistory);
-		highScore -= 250;
-		addToHistory(com);
+		Command com = validate.getCommand(currentRoom, currentRoom.getItemsPerAction());
+		highScore -= 1000;
 		if (com.getItem().getNeeded() != null) {
 			// checks if items are contained in the bunker
 			if (currentRoom.getAvailable().contains(com.getItem().getNeeded())) {
 				// reads line from file
 				DialogueParser.ReadSpecificLine(dialoguePath, com.getAction().getValue() + com.getItem().getValue());
-				// Adds to history
-				addToHistory(com);
 			} else {
 				IO.printCommandError(com.getAction(), com.getItem());
 			}

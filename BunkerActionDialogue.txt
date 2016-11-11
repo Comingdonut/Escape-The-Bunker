@@ -7,14 +7,14 @@
 
 
 USE(100) 
-0108 [You played a game. You shake the machine in frustration. You hear a creak
-      so you check the back of the machine. The back door of the machine is now open. You look inside and 
-      see a (BRICK).]
-0104 [You open the drawer and see an old used (BOBBY PIN).]
-0105 [You open the (CLOSET DOOR). The closet is filled with (BOX)es, besides a key that you suspect it goes to the (CLASSROOM DOOR).]
-0107 [You flick the light switch and the bunker comes into relieving clarity.  ]
-0106 [The door opens. You're finally out of the bunker.]
-0119 [There is nothing useful inside...]
+0108 [You played a game. You shake the (MACHINE) in frustration. You hear a creak
+      so you check the back of the (MACHINE). The back door of the machine is now open. You look inside and 
+      see a (BRICK). ]
+0104 [You open the drawer and see an old used (BOBBY PIN). ]
+0105 [You open the (CLOSET DOOR). The closet is filled with boxes, besides a key that you suspect it goes to the (CLASSROOM DOOR). ]
+0107 [You flick the light switch and the bunker comes into relieving clarity. ]
+0106 [The door opens. You're finally out of the bunker. ]
+0119 [There is nothing useful inside... ]
 GOTO(200) 
 
 
@@ -26,29 +26,29 @@ PICKUP(300)
 
 
 TAKE(300) 
-0301 [You pick up the (BRICK), wondering if you should take it.]
-0302 [You take the (BOBBY PIN), maybe you can pick a lock with it.]
-0303 [You now own a (SCREW DRIVER).]
-0304 [You take the key in disappointment knowing you are still locked in.]
-0306 [You now own a key that you suspect goes to the (CLASSROOM DOOR).]
+0301 [You pick up the (BRICK), wondering if you should take it. ]
+0302 [You take the (BOBBY PIN), maybe you can pick a lock with it. ]
+0303 [You now own a (SCREW DRIVER). ]
+0304 [You take the key in disappointment knowing you are still locked in. ]
+0306 [You now own a key that you suspect goes to the (CLASSROOM DOOR). ]
 0321 [Trying to take the (BOX), you dropped it. The (BOX) broke open 
-     on impact revealing a key that says closet on it.]
+      on impact revealing a key that says closet on it. ]
 0305 [You take the key in excitement, thinking now you actually may be getting 
-     closer to getting out.]
+      closer to getting out. ]
 
 
 LOOKAT(400)
 0407 [Walking to the light, you bump into things, realizing you’re still in the bunker.
-      You reach the light, realizing it’s a light switch.]
-0408 [There is a back door behind the machine.] or 408[There is a (BRICK) inside the machine.]
-0409 [There is nothing special here...]
-0410 [There is nothing special here.]
-0411 [There is nothing special here.]
-0412 [There is a (DISTORTED KEY) that doesn't look like it would fit a door.]
-0413 [The door is locked, but there is a (WINDOW) next to it...]
-0414 [The door appears locked.]
-0415 [The door appears locked.]
-0418 [The drawer has a (DISTORTED KEY) hole. A normal key won't fit.]
+      You reach the light, realizing it’s a light switch. ]
+0408 [The (MACHINE) beeps tantalizingly, inviting you to play it. ]
+0409 [There is nothing special here... ]
+0410 [There is nothing special here. ]
+0411 [There is nothing special here. ]
+0412 [There is a (DISTORTED KEY) that doesn't look like it would fit a door. ]
+0413 [The door is locked, but there is a (WINDOW) next to it... ]
+0414 [The door appears locked. ]
+0415 [The door appears locked. ]
+0418 [The drawer has a (DISTORTED KEY) hole. A normal key won't fit. ]
 0419 [The drawer appears open...]
 0420 [A (TV) rests upon the (COUNTER)...]
 0422 [There is a (BOX) behind the (TV)...]
@@ -69,15 +69,15 @@ SCAN(500)
 
 
 BREAK(600)
-0616 [You break the (WINDOW), and make your way upstairs to finally get out of this place.]
+0616 [You break the (WINDOW), and make your way upstairs to finally get out of this place. ]
 
 
 
 OPEN(700)
-0714 []
-0715 []
-0717 [You open the (LEFT DRAWER), finding nothing...]
-0718 [You open the drawer and see an old used (BOBBY PIN).]
+0714 [You open the (CLOSET DOOR). The closet is filled with boxes, besides a key that you suspect it goes to the (CLASSROOM DOOR). ]
+0715 [The door opens. You're finally out of the bunker. ]
+0717 [You open the (LEFT DRAWER), finding nothing... ]
+0718 [You open the drawer and see an old used (BOBBY PIN). ]
 
 EXIT(800)
 
@@ -88,7 +88,7 @@ ESCAPE(900)
 
 
 PICK(1000)
-1014 [You open the (CLOSET DOOR). The closet is filled with boxes, besides a key that you suspect it goes to the (CLASSROOM DOOR).]
+1014 [You open the (CLOSET DOOR). The closet is filled with boxes, besides a key that you suspect it goes to the (CLASSROOM DOOR). ]
 
 
 

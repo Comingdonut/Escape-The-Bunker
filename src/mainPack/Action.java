@@ -3,10 +3,10 @@ package mainPack;
 public enum Action {
 	
 	USE (100),
-	GOTO (200),
-	PICKUP (300),
+	GO_TO (200),
+	PICK_UP (300),
 	TAKE (300),
-	LOOKAT (400),
+	LOOK_AT (400),
 	INSPECT (400),
 	SCAN (500),
 	BREAK (600),
