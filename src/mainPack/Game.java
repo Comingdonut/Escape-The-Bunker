@@ -166,57 +166,57 @@ public class Game {
 
 	private void gameManager() {
 		Room currentRoom = createBunker();
-		//tutorialPhase(currentRoom);
+		tutorialPhase(currentRoom);
 		story(currentRoom);
 	}
 
 	private void story(Room currentRoom) {
-//		boolean bunkerDone = false;
-//		boolean classRoomDone = false;
+		boolean bunkerDone = false;
+		boolean classRoomDone = false;
 		boolean commonsDone = false;
-//		int[] bunkerValues = { 108, 104, 105, 301, 304, 321, 412, 422, 702, 718, 1014 };
-//		int[] classRoomValues = { 402, 704 };
+		int[] bunkerValues = { 108, 104, 105, 301, 304, 321, 412, 422, 702, 718, 1014 };
+		int[] classRoomValues = { 402, 704 };
 		int[] commonsValues = {709, 405, 402, 712, 706, 101, 410};
-//		int hour = 0;
-//		int minute = 0;
-//		while (!bunkerDone) {
-//
-//			Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
-//
-//			if (com.getAction().getValue() + com.getItem().getValue() == 616) {
-//				bunkerDone = true;
-//				classRoomDone = true;
-//			} else if (com.getAction().getValue() + com.getItem().getValue() == 106) {
-//				bunkerDone = true;
-//			}
-//		}
-//		if (!classRoomDone) {
-//			currentRoom = createClassRoom();
-//			Random rand = new Random();
-//			hour = rand.nextInt(12) + 1;
-//			minute = rand.nextInt(60);
-//		}
-//
-//		while (!classRoomDone) {
-//			Command com = playRoom("./ClassroomActionDialogue.txt", classRoomValues, currentRoom);
-//			if (com.getAction().getValue() + com.getItem().getValue() == 107) {
-//				System.out.println(hour + ":" + minute);
-//			}
-//			if (com.getAction().getValue() + com.getItem().getValue() == 704) {
-//				System.out.println("Enter here: ");
-//				String input = Validation.getInput();
-//				String passcode = "" + hour + minute;
-//				if (passcode.equals(input)) {
-//					System.out.println("You open the locker and see a key inside.");
-//					currentRoom.takeItem(currentRoom.getHidden(), key);
-//				} else {
-//					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
-//				}
-//			}
-//			if (com.getAction().getValue() + com.getItem().getValue() == 105) {
-//				classRoomDone = true;
-//			}
-//		}
+		int hour = 0;
+		int minute = 0;
+		while (!bunkerDone) {
+
+			Command com = playRoom("./BunkerActionDialogue.txt", bunkerValues, currentRoom);
+
+			if (com.getAction().getValue() + com.getItem().getValue() == 616) {
+				bunkerDone = true;
+				classRoomDone = true;
+			} else if (com.getAction().getValue() + com.getItem().getValue() == 106) {
+				bunkerDone = true;
+			}
+		}
+		if (!classRoomDone) {
+			currentRoom = createClassRoom();
+			Random rand = new Random();
+			hour = rand.nextInt(12) + 1;
+			minute = rand.nextInt(60);
+		}
+
+		while (!classRoomDone) {
+			Command com = playRoom("./ClassroomActionDialogue.txt", classRoomValues, currentRoom);
+			if (com.getAction().getValue() + com.getItem().getValue() == 107) {
+				System.out.println(hour + ":" + minute);
+			}
+			if (com.getAction().getValue() + com.getItem().getValue() == 704) {
+				System.out.println("Enter here: ");
+				String input = Validation.getInput();
+				String passcode = "" + hour + minute;
+				if (passcode.equals(input)) {
+					System.out.println("You open the locker and see a key inside.");
+					currentRoom.takeItem(currentRoom.getHidden(), key);
+				} else {
+					System.out.println("The padlock doesn't respond to the code you entered. It must be wrong.");
+				}
+			}
+			if (com.getAction().getValue() + com.getItem().getValue() == 105) {
+				classRoomDone = true;
+			}
+		}
 		currentRoom = createCommons();
 
 		Random rand = new Random();
@@ -294,7 +294,7 @@ public class Game {
 
 	private Command playRoom(String dialoguePath, int[] values, Room currentRoom) {
 		Command com = validate.getCommand(currentRoom, commandHistory);
-		//
+		addToHistory(com);
 		if (com.getItem().getNeeded() != null) {
 			// checks if items are contained in the bunker
 			if (currentRoom.getAvailable().contains(com.getItem().getNeeded())) {

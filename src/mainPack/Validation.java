@@ -58,7 +58,7 @@ public class Validation {
 	private void helper(ArrayList<Command> commands) {
 		System.out.println("Command List:");
 		for(Command c : commands){
-			System.out.println(c.getAction().toString());
+			System.out.println(c.getAction().toString() + " " + c.getItem().getName1());
 		}
 
 	}

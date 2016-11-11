@@ -1,25 +1,25 @@
-Clock(1) Desk(2) Tables(3) Locker(4) BunkerDoor(5) ClassroomDoor(6) Cloth(7) ClassKey(8)
+(CLOCK)(1) (DESK)(2) (TABLES)(3) (LOCKER)(4) BunkerDoor(5) ClassroomDoor(6) (CLOTH)(7) ClassKey(8)
 
 USE(100)
 0105 [You use the key on the door and miraculously it opens. The Heavens sing out as you make your way to the commons.]
-0107 [You wipe the clock until the time is visible. It reads: ]
+0107 [You wipe the (CLOCK) until the time is visible. It reads: ]
 0108 [The door opens, you leave the room behind.]
 
 GOTO(200)
 
 PICKUP(300)
-0307 [You pick up the cloth, wondering if you even need it.]
-0305 [You take the key inside the locker, thinking I sure do like collecting these keys.]
+0307 [You pick up the (CLOTH), wondering if you even need it.]
+0305 [You take the key inside the (LOCKER), thinking I sure do like collecting these keys.]
 
 TAKE(300)
-0307 [You pick up the cloth, wondering if you even need it.]
-0305 [You take the key inside the locker, thinking I sure do like collecting these keys.]
+0307 [You pick up the (CLOTH), wondering if you even need it.]
+0305 [You take the key inside the (LOCKER), thinking I sure do like collecting these keys.]
 
 LOOKAT(400)
-0401 [The clock is dirty, it's hard to see the time.]
-0402 [There is a piece of cloth inside the desk.]
-0403 [All the tables are empty, so it's best to ignore them.]
-0404 [The locker has a lock on it, it appears to only accept digits between 0 - 9...]
+0401 [The (CLOCK) is dirty, it's hard to see the time.]
+0402 [There is a piece of (CLOTH) inside the (DESK).]
+0403 [All the (TABLES) are empty, so it's best to ignore them.]
+0404 [The (LOCKER) has a lock on it, it appears to only accept digits between 0 - 9...]
 0406 [The door appears locked.]
 
 INSPECT(400)
