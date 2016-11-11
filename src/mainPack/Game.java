@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class Game {
 
+	private int highScore = 103750;
+	
 	private Room createBunker() {
 		Room bunker = null;
 		HashMap<Action, ArrayList<Item>> actionables = new HashMap<Action, ArrayList<Item>>();
@@ -147,7 +149,7 @@ public class Game {
 
 		commons = new Room(actionables, hidden, available);
 		commons.setDescription("There is the reception’s desk near the entrance.\n" +
-				"The Avanti market is locked.\n" +
+				"There is a market.\n" +
 				"There are clothes for sale behind a locked gate.\n" +
 				"The rest of the commons is filled with tables and chairs, except the imaging bar.\n" +
 				"There are three doors, the front door, the side door, and the back door.\n");
@@ -168,6 +170,8 @@ public class Game {
 		Room currentRoom = createBunker();
 		tutorialPhase(currentRoom);
 		story(currentRoom);
+		System.out.println("***YOUR HIGHSCORE: " + highScore + "***");
+		Validation.getInput();
 	}
 
 	private void story(Room currentRoom) {
@@ -294,6 +298,7 @@ public class Game {
 
 	private Command playRoom(String dialoguePath, int[] values, Room currentRoom) {
 		Command com = validate.getCommand(currentRoom, commandHistory);
+		highScore -= 250;
 		addToHistory(com);
 		if (com.getItem().getNeeded() != null) {
 			// checks if items are contained in the bunker
